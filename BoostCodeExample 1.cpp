@@ -1,12 +1,12 @@
 #include <boost/config.hpp>
 #include <iostream>
 #include <fstream>
-//INCLUDING SOME BASIC HEADERS
+                                                        //INCLUDING SOME BASIC HEADERS
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
 #include <boost/property_map/property_map.hpp>
-//INCLUDING BOOST HEADERS
+                                                        //INCLUDING BOOST HEADERS
 using namespace boost;
 
 int main(int, char*[])
@@ -18,7 +18,7 @@ int main(int, char*[])
     typedef std::pair< int, int > Edge;
 
     const int num_nodes = 5;
-    enum nodes               //ENUMERATING ALPHABETS INSTEAD OF NUMBERS
+    enum nodes                                           //ENUMERATING ALPHABETS INSTEAD OF NUMBERS
     {
         A,
         B,
