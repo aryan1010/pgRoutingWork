@@ -40,17 +40,3 @@ int main(int, char*[])
 
     return 0;
 }
-
-// This code demonstrates how to use the Boost C++ library's graph algorithms to perform Dijkstra's shortest path algorithm on a graph.
-
-// The code starts by including various Boost libraries, including the Graph library which contains functions and data structures for graph manipulation. It then defines a directed graph data structure using the adjacency_list template, which represents a graph as a collection of vertices and edges.
-
-// The graph structure includes the property template parameter to specify that the edges have an associated weight of type int. It then defines a type alias for the graph's vertex descriptor and an Edge pair representing an edge in the graph.
-
-// Next, it creates a graph with five nodes labeled A through E and edges connecting them with different weights. The code then creates a property map that maps the edges of the graph to their weights.
-
-// After that, it defines two vectors for storing the predecessor and distance information of the vertices in the graph. It selects vertex A as the starting vertex for the shortest path algorithm and calls the dijkstra_shortest_paths function from Boost's graph algorithms library with the graph, the starting vertex, and the two vectors.
-
-// The dijkstra_shortest_paths function calculates the shortest paths from the starting vertex to all other vertices in the graph and stores the results in the two vectors.
-
-// Finally, the code iterates over all the vertices in the graph, printing out the shortest distances from the starting vertex to each vertex and their corresponding parents.
