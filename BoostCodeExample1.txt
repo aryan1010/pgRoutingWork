@@ -1,0 +1,6 @@
+Distances
+distance(A) = 0
+distance(B) = Not Reachable
+distance(C) = 1
+distance(D) = 4
+distance(E) = 5
