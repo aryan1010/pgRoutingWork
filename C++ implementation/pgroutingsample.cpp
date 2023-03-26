@@ -1,131 +1,67 @@
-#include<iostream>
-#include<set>
-#include<list>
-#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
-
-typedef struct nodes {
-   int dest;
-   int cost;
-}node;
-
-class Graph {
-   int n;
-   list<node> *adjList;
-   private:
-      void showList(int src, list<node> lt) {
-         list<node> :: iterator i;
-         node tempNode;
-
-         for(i = lt.begin(); i != lt.end(); i++) {
-            tempNode = *i;
-            cout << "(" << src << ")---("<<tempNode.dest << "|"<<tempNode.cost<<") ";
-         }
-         cout << endl;
-      }
-   public:
-      Graph() {
-         n = 0;
-      }
-
-      Graph(int nodeCount) {
-         n = nodeCount;
-         adjList = new list<node>[n];
-      }
-
-      void addEdge(int source, int dest, int cost) {
-         node newNode;
-         newNode.dest = dest;
-         newNode.cost = cost;
-         adjList[source].push_back(newNode);
-      }
-
-      void displayEdges() {
-         for(int i = 0; i<n; i++) {
-            list<node> tempList = adjList[i];
-            showList(i, tempList);
-         }
-      }
-
-      friend void dijkstra(Graph g, int *dist, int *prev, int start);
-};
-
-void dijkstra(Graph g, int *dist, int *prev, int start) {
-   int n = g.n;
-
-   for(int u = 0; u<n; u++) {
-      dist[u] = 9999;   //set as infinity
-      prev[u] = -1;    //undefined previous
-   }
-
-   dist[start] = 0;   //distance of start is 0
-   set<int> S;       //create empty set S
-   list<int> Q;
-
-   for(int u = 0; u<n; u++) {
-      Q.push_back(u);    //add each node into queue
-   }
-
-   while(!Q.empty()) {
-      list<int> :: iterator i;
-      i = min_element(Q.begin(), Q.end());
-      int u = *i; //the minimum element from queue
-      Q.remove(u);
-      S.insert(u); //add u in the set
-      list<node> :: iterator it;
-
-      for(it = g.adjList[u].begin(); it != g.adjList[u].end();it++) {
-         if((dist[u]+(it->cost)) < dist[it->dest]) { //relax (u,v)
-            dist[it->dest] = (dist[u]+(it->cost));
-            prev[it->dest] = u;
-         }
-      }
-   }
+// Total number of vertices in graph
+#define V 17
+// For printing the shortest path
+void shortest_path(int dist[], int n)
+{
+   cout<<"Vertex "<<"\t"<<"Distance from Source\n";
+   for (int i = 1; i <= V; i++)
+   cout<<" \t\t \n"<< i<<" \t\t "<<dist[i-1];
 }
-
-int main() {
-   int n = 5;
-   Graph g(n);
-   int dist[n], prev[n];
-   int start = 0;
-
-
-g.addEdge(5,6,1);
-g.addEdge(6,5,1);
-g.addEdge(10,6,1);
-g.addEdge(6,7,1);
-g.addEdge(7,6,1);
-g.addEdge(7,11,1);
-g.addEdge(11,7,1);
-g.addEdge(3,7,1);
-g.addEdge(7,3,1);
-g.addEdge(1,3,1);
-g.addEdge(3,1,1);
-g.addEdge(11,16,1);
-g.addEdge(16,11,1);
-g.addEdge(15,10,1);
-g.addEdge(16,15,1);
-g.addEdge(15,16,1);
-g.addEdge(17,16,1);
-g.addEdge(16,17,1);
-g.addEdge(11,12,1);
-g.addEdge(12,17,1);
-g.addEdge(7,8,1);
-g.addEdge(8,7,1);
-g.addEdge(8,9,1);
-g.addEdge(10,11,1);
-g.addEdge(8,12,1);
-g.addEdge(2,4,1);
-g.addEdge(4,2,1);
-g.addEdge(13,14,1);
-g.addEdge(14,13,1);
-g.addEdge(9,8,1);
-
-
-   dijkstra(g, dist, prev, start);
-
-   for(int i = 0; i<n; i++)
-      if(i != start)
-         cout<<start<<" to "<<i<<", Cost: "<<dist[i]<<" Previous: "<<prev[i]<<endl;
-    return 0;
+// For calculating minimum distance
+int minDist(int dist[], bool Set[])
+{
+   int min = INT_MAX, min_index;
+   for (int i = 0; i < V; i++)
+   if (Set[i] == false && dist[i] <= min)
+   min = dist[i], min_index = i;
+   return min_index;
+}
+// Calculate shortest paths from source to all other vertices
+void Dijkstra(int g[V][V], int src)
+{
+    src--;
+   int dist[V];
+   bool Set[V];
+   for (int i = 0; i < V; i++)
+   dist[i] = INT_MAX, Set[i] = false;
+   dist[src] = 0;
+   for (int c = 0; c < V- 1; c++)
+   {
+      int u = minDist(dist, Set);
+      Set[u] = true;
+      for (int j = 0; j < V; j++)
+    if (!Set[j] && g[u][j] && dist[u] != INT_MAX && dist[u]+ g[u][j] < dist[j])
+    {
+    dist[j] = dist[u] + g[u][j];
+      }
+   }
+   shortest_path(dist, V);
+}
+// Driver Program
+int main()
+{
+      ios_base::sync_with_stdio(false);
+      cin.tie(NULL);
+      int G[V][V] = { 
+      { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
+      { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 },};
+      Dijkstra(G, 11);  
+      return 0;
 }
