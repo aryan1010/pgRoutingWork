@@ -17,7 +17,7 @@ int main(int, char*[])
     typedef graph_traits< graph_t >::vertex_descriptor vertex_descriptor;
     typedef std::pair< int, int > Edge;
 
-    const int num_nodes = 17;
+    const int num_nodes = 17;                           // INPUT EDGES
     Edge edge_array[] = { {5,6},{6,5},{10,6},{6,7},{7,6},{7,11},{11,7},{3,7},{7,3},{1,3},{3,1},{11,16},{16,11},{15,10},{16,15},{15,16}
     ,{17,16},{16,17},{11,12},{12,17},{7,8},{8,7},{8,9},{10,11},{8,12},{2,4},{4,2},{13,14},{14,13},{9,8} };
     int weights[] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};  //INPUT WEIGHTS OF THE EDGES
