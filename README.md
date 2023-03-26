@@ -11,7 +11,7 @@ sudo apt-get install libboost-all-dev
 <img src="images/pgrouting example.jpg" alt="Alt text" title="Optional title">
 <img src="images/Screenshot from 2023-03-27 00-06-52.png" alt="Alt text" title="Optional title">
 ## pgRoutingSampleData Boost Implementation 
-<img src="images/Screenshot from 2023-03-27 00-06-52.png" alt="Alt text" title="Optional title">
+<img src="images/Screenshot from 2023-03-27 00-14-35.png" alt="Alt text" title="Optional title">
 ## Proposal Example C++ Implementation(Adjacency Matrix)
 <img src="images/Untitled.png" alt="Alt text" title="Optional title">
 <img src="images/Screenshot from 2023-03-27 00-07-38.png" alt="Alt text" title="Optional title">
