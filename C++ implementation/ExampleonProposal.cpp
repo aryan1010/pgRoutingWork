@@ -19,7 +19,7 @@ int minDist(int dist[], bool Set[])
    return min_index;
 }
 // Calculate shortest paths from source to all other vertices
-void Dijkstra(int g[V][V], int src)
+void Dijkstra(int g[V][V], int src, int D)
 {
     src--;
    int dist[V];
@@ -30,6 +30,8 @@ void Dijkstra(int g[V][V], int src)
    for (int c = 0; c < V- 1; c++)
    {
       int u = minDist(dist, Set);
+      if(dist[u]>=D)      //breaking the code here
+      break; 
       Set[u] = true;
       for (int j = 0; j < V; j++)
     if (!Set[j] && g[u][j] && dist[u] != INT_MAX && dist[u]+ g[u][j] < dist[j])
@@ -50,6 +52,6 @@ int main()
       { 1, 7, 0, 2, 0},
       { 0, 5, 2, 0, 7},
       { 0, 1, 0, 7, 0},};
-      Dijkstra(G, 1);  
+      Dijkstra(G, 1 ,5);  
       return 0;
 }
